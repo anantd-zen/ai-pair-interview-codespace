@@ -13,6 +13,12 @@
       "version": "latest"
     }
   },
+  "secrets": {
+    "DEFAULT_OPENROUTER_API_KEY": {
+      "description": "OpenRouter API key used by the bundled Pi coding agent.",
+      "documentationUrl": "https://openrouter.ai/keys"
+    }
+  },
   "containerEnv": {
     "PI_MODEL": "openrouter/free"
   },

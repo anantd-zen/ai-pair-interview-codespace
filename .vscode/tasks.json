@@ -2,30 +2,38 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Interview: Test Python challenge",
-      "type": "shell",
-      "command": ".venv/bin/python -m pytest -q -m python_challenge",
-      "group": { "kind": "test", "isDefault": true },
-      "problemMatcher": []
-    },
-    {
-      "label": "Interview: Test SQL challenge",
-      "type": "shell",
-      "command": ".venv/bin/python -m pytest -q -m sql_challenge",
-      "problemMatcher": []
-    },
-    {
-      "label": "Interview: Run SQL query",
-      "type": "shell",
-      "command": ".venv/bin/python scripts/run_sql_challenge.py",
-      "problemMatcher": []
-    },
-    {
       "label": "Interview: Start Pi",
       "type": "shell",
-      "command": "bash scripts/interview_pi.sh",
+      "command": "cd challenge && pi",
       "problemMatcher": [],
-      "presentation": { "reveal": "always", "panel": "dedicated", "focus": true }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Interview: Open NYC 311 in DuckDB",
+      "type": "shell",
+      "command": "duckdb :memory: -init datasets/nyc311_q1_2025/open_snapshot.sql",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Interview: Run challenge setup",
+      "type": "shell",
+      "command": "bash challenge/setup.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Template: Verify environment",
+      "type": "shell",
+      "command": "bash scripts/verify_environment.sh",
+      "problemMatcher": []
     }
   ]
 }
