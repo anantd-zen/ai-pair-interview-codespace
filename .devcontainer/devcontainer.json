@@ -14,7 +14,7 @@
     }
   },
   "containerEnv": {
-    "PI_MODEL": "anthropic/claude-sonnet-4"
+    "PI_MODEL": "z-ai/glm-5.2:free"
   },
   "customizations": {
     "vscode": {
