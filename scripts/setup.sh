@@ -19,14 +19,13 @@ if [[ -z "$pi_target" ]]; then
   exit 1
 fi
 
-# Preserve npm's real CLI entrypoint, then put the OpenRouter-aware launcher at
-# the original `pi` path so every terminal gets the same behavior.
 ln -sfn "$pi_target" "$pi_real"
 ln -sfn "$workspace_dir/scripts/pi_openrouter.sh" "$pi_binary"
 
-mkdir -p .interview-work "$HOME/.local/bin"
+mkdir -p .interview-work "$HOME/.local/bin" "$HOME/.pi/agent"
 ln -sfn "$workspace_dir/scripts/pi_openrouter.sh" "$HOME/.local/bin/interview-pi"
 ln -sfn "$workspace_dir/scripts/verify_environment.sh" "$HOME/.local/bin/verify-environment"
+ln -sfn "$workspace_dir/.pi/models.json" "$HOME/.pi/agent/models.json"
 
 bash scripts/verify_environment.sh
 

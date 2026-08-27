@@ -14,7 +14,7 @@
     }
   },
   "containerEnv": {
-    "PI_MODEL": "nvidia/nemotron-3.5-lightning:free"
+    "PI_MODEL": "nvidia/nemotron-3-super-120b-a12b:free"
   },
   "customizations": {
     "vscode": {
