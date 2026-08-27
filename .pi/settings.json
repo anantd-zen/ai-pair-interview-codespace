@@ -1,9 +1,6 @@
 {
   "defaultProvider": "openrouter",
-  "defaultModel": "nvidia/nemotron-3-super-120b-a12b:free",
-  "enabledModels": [
-    "nvidia/nemotron-3-super-120b-a12b:free",
-    "nvidia/nemotron-3-ultra-550b-a55b:free"
-  ]
+  "defaultModel": "openrouter/free",
+  "enabledModels": ["openrouter/free"]
 }
 

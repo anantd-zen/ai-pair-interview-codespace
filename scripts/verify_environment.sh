@@ -18,6 +18,7 @@ else
 fi
 
 echo 'Default provider: openrouter'
-echo "Default model: ${PI_MODEL_OVERRIDE:-nvidia/nemotron-3.5-lightning:free}"
+echo "Default model: ${PI_MODEL_OVERRIDE:-openrouter/free}"
+echo 'Model picker: openrouter/free only'
 echo 'Environment check complete.'
 

@@ -1,13 +1,14 @@
 # AI data notice for interview participants
 
-The default model is OpenRouter's free endpoint:
-`nvidia/nemotron-3.5-lightning:free`.
+The default model is `openrouter/free`, which dynamically selects among free
+models currently available through OpenRouter and filters for request features
+such as tool calling.
 
-OpenRouter currently states that requests to this free endpoint are logged for
-security and to improve NVIDIA products and services. Do not submit confidential
-source code, secrets, personal information, or other sensitive interview data.
+The upstream model and provider may differ between requests and may have
+different data-handling policies. Do not submit confidential source code,
+secrets, personal information, or other sensitive interview data.
 
-Before each interview, confirm that the model and its data-handling terms are
-still appropriate. To use another model, set `PI_MODEL` in the Codespace or
-change it in `.devcontainer/devcontainer.json`.
+Before each interview, confirm that OpenRouter's current free-router terms
+remain appropriate. Set `PI_MODEL_OVERRIDE` only when intentionally bypassing
+the free router.
 

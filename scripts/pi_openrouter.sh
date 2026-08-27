@@ -11,10 +11,9 @@ if [[ -z "${OPENROUTER_API_KEY:-}" ]]; then
   exit 1
 fi
 
-default_model="nvidia/nemotron-3-super-120b-a12b:free"
-verified_models="nvidia/nemotron-3-super-120b-a12b:free,nvidia/nemotron-3-ultra-550b-a55b:free"
+default_model="openrouter/free"
 model="${PI_MODEL_OVERRIDE:-$default_model}"
-models="${PI_MODELS_OVERRIDE:-$verified_models}"
+models="${PI_MODELS_OVERRIDE:-$default_model}"
 
 if [[ ! "$model" =~ ^[A-Za-z0-9._:/-]+$ ]]; then
   echo 'PI_MODEL_OVERRIDE contains unsupported characters.' >&2
