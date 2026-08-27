@@ -4,7 +4,9 @@ param(
 
     [string]$Repository = "",
 
-    [string]$Branch = "main"
+    [string]$Branch = "main",
+
+    [string]$Machine = "basicLinux32gb"
 )
 
 $ErrorActionPreference = "Stop"
@@ -27,5 +29,13 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "Creating a fresh Codespace for $Repository..."
-gh codespace create --repo $Repository --branch $Branch
+$createArgs = @(
+    "codespace", "create",
+    "--repo", $Repository,
+    "--branch", $Branch,
+    "--machine", $Machine,
+    "--default-permissions",
+    "--idle-timeout", "30m"
+)
+& gh @createArgs
 
