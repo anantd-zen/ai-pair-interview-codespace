@@ -14,7 +14,7 @@
     }
   },
   "containerEnv": {
-    "PI_MODEL": "z-ai/glm-5.2:free"
+    "PI_MODEL": "nvidia/nemotron-3.5-lightning:free"
   },
   "customizations": {
     "vscode": {

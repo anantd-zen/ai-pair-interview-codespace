@@ -19,9 +19,11 @@ if ! command -v pi >/dev/null 2>&1; then
   exit 1
 fi
 
-model="${PI_MODEL:-z-ai/glm-5.2:free}"
+# Use a dedicated override so a stale PI_MODEL from an already-running
+# devcontainer cannot pin a previous default after this repository is updated.
+model="${PI_MODEL_OVERRIDE:-nvidia/nemotron-3.5-lightning:free}"
 if [[ ! "$model" =~ ^[A-Za-z0-9._:/-]+$ ]]; then
-  echo 'PI_MODEL contains unsupported characters.' >&2
+  echo 'PI_MODEL_OVERRIDE contains unsupported characters.' >&2
   exit 1
 fi
 
