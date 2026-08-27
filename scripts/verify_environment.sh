@@ -6,7 +6,7 @@ cd "$workspace_dir"
 
 printf 'Python: '
 .venv/bin/python --version
-printf 'Pi: '
+printf 'Pi launcher: '
 pi --version
 
 if [[ -n "${OPENROUTER_API_KEY:-}" ]]; then
@@ -17,5 +17,7 @@ else
   echo 'OpenRouter key: missing; add a Codespaces secret'
 fi
 
+echo 'Default provider: openrouter'
+echo "Default model: ${PI_MODEL_OVERRIDE:-nvidia/nemotron-3.5-lightning:free}"
 echo 'Environment check complete.'
 
