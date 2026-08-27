@@ -11,8 +11,6 @@ if [[ -z "$key" ]]; then
   exit 1
 fi
 
-export INTERVIEW_OPENROUTER_API_KEY="$key"
-unset OPENROUTER_API_KEY
 export PI_CODING_AGENT_DIR="$workspace_dir/.interview-work/pi-agent"
 
 default_model="openrouter/free"
@@ -33,5 +31,6 @@ exec "$real_pi" \
   --provider interview-openrouter \
   --model "$model" \
   --models "$model" \
+  --api-key "$key" \
   "$@"
 
