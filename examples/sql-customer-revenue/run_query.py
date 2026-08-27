@@ -1,11 +1,11 @@
-"""Run the current SQL challenge against a fresh in-memory DuckDB database."""
+"""Run the example SQL challenge against a fresh in-memory DuckDB database."""
 
 from pathlib import Path
 
 import duckdb
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parent
 SQL_DIR = ROOT / "sql"
 
 

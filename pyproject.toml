@@ -1,32 +1,28 @@
-[build-system]
-requires = ["hatchling>=1.25"]
-build-backend = "hatchling.build"
-
 [project]
-name = "ai-pair-interview-challenge"
+name = "ai-pair-interview-template"
 version = "0.1.0"
-description = "Python and SQL challenges for an AI-assisted pair interview"
+description = "Reusable Python and SQL pairing-interview environment"
 requires-python = ">=3.11"
+dependencies = [
+  "duckdb==1.5.5"
+]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
-  "duckdb==1.5.5",
   "pytest>=8.3,<9",
   "ruff>=0.9,<1"
 ]
 
-[tool.pytest.ini_options]
-addopts = "-ra"
-testpaths = ["tests"]
-markers = [
-  "python_challenge: tests for the Python pairing challenge",
-  "sql_challenge: tests for the DuckDB SQL challenge"
-]
+[tool.uv]
+package = false
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/interview_challenge"]
+[tool.pytest.ini_options]
+testpaths = ["template_tests"]
 
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
 
