@@ -10,9 +10,11 @@ printf 'Pi: '
 pi --version
 
 if [[ -n "${OPENROUTER_API_KEY:-}" ]]; then
-  echo 'OpenRouter key: available (value not displayed)'
+  echo 'OpenRouter key: per-interview override available (value not displayed)'
+elif [[ -n "${DEFAULT_OPENROUTER_API_KEY:-}" ]]; then
+  echo 'OpenRouter key: repository default available (value not displayed)'
 else
-  echo 'OpenRouter key: missing; add OPENROUTER_API_KEY as a Codespaces secret'
+  echo 'OpenRouter key: missing; add a Codespaces secret'
 fi
 
 echo 'Environment check complete.'

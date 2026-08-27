@@ -4,8 +4,13 @@ set -euo pipefail
 workspace_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$workspace_dir"
 
+if [[ -z "${OPENROUTER_API_KEY:-}" && -n "${DEFAULT_OPENROUTER_API_KEY:-}" ]]; then
+  export OPENROUTER_API_KEY="$DEFAULT_OPENROUTER_API_KEY"
+fi
+
 if [[ -z "${OPENROUTER_API_KEY:-}" ]]; then
-  echo 'OPENROUTER_API_KEY is not set.' >&2
+  echo 'No OpenRouter key is available.' >&2
+  echo 'Add DEFAULT_OPENROUTER_API_KEY or OPENROUTER_API_KEY as a Codespaces secret.' >&2
   exit 1
 fi
 
