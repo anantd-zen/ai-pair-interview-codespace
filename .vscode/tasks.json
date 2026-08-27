@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Interview: Test Python challenge",
+      "type": "shell",
+      "command": ".venv/bin/python -m pytest -q -m python_challenge",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Interview: Test SQL challenge",
+      "type": "shell",
+      "command": ".venv/bin/python -m pytest -q -m sql_challenge",
+      "problemMatcher": []
+    },
+    {
+      "label": "Interview: Run SQL query",
+      "type": "shell",
+      "command": ".venv/bin/python scripts/run_sql_challenge.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Interview: Start Pi",
+      "type": "shell",
+      "command": "bash scripts/interview_pi.sh",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated", "focus": true }
+    }
+  ]
+}
+

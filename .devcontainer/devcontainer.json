@@ -1,0 +1,40 @@
+{
+  "name": "AI Pair Interview",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "containerEnv": {
+    "PI_MODEL": "anthropic/claude-sonnet-4"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "MS-vsliveshare.vsliveshare",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "python.testing.pytestEnabled": true,
+        "liveshare.guestApprovalRequired": true,
+        "liveshare.anonymousGuestApproval": "reject",
+        "liveshare.autoShareTerminals": false
+      }
+    }
+  },
+  "postCreateCommand": "bash scripts/setup.sh",
+  "postStartCommand": "bash scripts/verify_environment.sh",
+  "remoteUser": "vscode"
+}
+
