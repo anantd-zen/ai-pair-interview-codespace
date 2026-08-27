@@ -28,5 +28,7 @@ ln -sfn "$workspace_dir/.pi/models.json" "$agent_dir/models.json"
 ln -sfn "$workspace_dir/scripts/pi_openrouter.sh" "$HOME/.local/bin/interview-pi"
 ln -sfn "$workspace_dir/scripts/verify_environment.sh" "$HOME/.local/bin/verify-environment"
 
+PI_CODING_AGENT_DIR="$agent_dir" "$pi_real" install npm:pi-web-access
+
 bash scripts/verify_environment.sh
 

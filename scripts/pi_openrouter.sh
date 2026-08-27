@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-workspace_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+script_path="$(readlink -f "${BASH_SOURCE[0]}")"
+workspace_dir="$(cd "$(dirname "$script_path")/.." && pwd)"
 
 key="${OPENROUTER_API_KEY:-${DEFAULT_OPENROUTER_API_KEY:-}}"
 if [[ -z "$key" ]]; then
@@ -10,8 +11,6 @@ if [[ -z "$key" ]]; then
   exit 1
 fi
 
-# Keep built-in OpenRouter and GitHub Copilot providers out of the interview
-# picker. The custom provider reads this private variable from models.json.
 export INTERVIEW_OPENROUTER_API_KEY="$key"
 unset OPENROUTER_API_KEY
 export PI_CODING_AGENT_DIR="$workspace_dir/.interview-work/pi-agent"
