@@ -1,6 +1,9 @@
 {
   "providers": {
-    "openrouter": {
+    "interview-openrouter": {
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "api": "openai-completions",
+      "apiKey": "$INTERVIEW_OPENROUTER_API_KEY",
       "models": [
         {
           "id": "openrouter/free",

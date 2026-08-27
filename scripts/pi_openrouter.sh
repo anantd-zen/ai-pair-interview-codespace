@@ -1,26 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ -z "${OPENROUTER_API_KEY:-}" && -n "${DEFAULT_OPENROUTER_API_KEY:-}" ]]; then
-  export OPENROUTER_API_KEY="$DEFAULT_OPENROUTER_API_KEY"
-fi
+workspace_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-if [[ -z "${OPENROUTER_API_KEY:-}" ]]; then
+key="${OPENROUTER_API_KEY:-${DEFAULT_OPENROUTER_API_KEY:-}}"
+if [[ -z "$key" ]]; then
   echo 'No OpenRouter key is available.' >&2
   echo 'Add DEFAULT_OPENROUTER_API_KEY or OPENROUTER_API_KEY as a Codespaces secret.' >&2
   exit 1
 fi
 
+# Keep built-in OpenRouter and GitHub Copilot providers out of the interview
+# picker. The custom provider reads this private variable from models.json.
+export INTERVIEW_OPENROUTER_API_KEY="$key"
+unset OPENROUTER_API_KEY
+export PI_CODING_AGENT_DIR="$workspace_dir/.interview-work/pi-agent"
+
 default_model="openrouter/free"
 model="${PI_MODEL_OVERRIDE:-$default_model}"
-models="${PI_MODELS_OVERRIDE:-$default_model}"
-
 if [[ ! "$model" =~ ^[A-Za-z0-9._:/-]+$ ]]; then
   echo 'PI_MODEL_OVERRIDE contains unsupported characters.' >&2
-  exit 1
-fi
-if [[ ! "$models" =~ ^[A-Za-z0-9._:/,*-]+$ ]]; then
-  echo 'PI_MODELS_OVERRIDE contains unsupported characters.' >&2
   exit 1
 fi
 
@@ -32,8 +31,8 @@ if [[ ! -x "$real_pi" ]]; then
 fi
 
 exec "$real_pi" \
-  --provider openrouter \
+  --provider interview-openrouter \
   --model "$model" \
-  --models "$models" \
+  --models "$model" \
   "$@"
 

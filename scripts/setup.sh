@@ -22,10 +22,11 @@ fi
 ln -sfn "$pi_target" "$pi_real"
 ln -sfn "$workspace_dir/scripts/pi_openrouter.sh" "$pi_binary"
 
-mkdir -p .interview-work "$HOME/.local/bin" "$HOME/.pi/agent"
+agent_dir="$workspace_dir/.interview-work/pi-agent"
+mkdir -p "$agent_dir" "$HOME/.local/bin"
+ln -sfn "$workspace_dir/.pi/models.json" "$agent_dir/models.json"
 ln -sfn "$workspace_dir/scripts/pi_openrouter.sh" "$HOME/.local/bin/interview-pi"
 ln -sfn "$workspace_dir/scripts/verify_environment.sh" "$HOME/.local/bin/verify-environment"
-ln -sfn "$workspace_dir/.pi/models.json" "$HOME/.pi/agent/models.json"
 
 bash scripts/verify_environment.sh
 
