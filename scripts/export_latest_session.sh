@@ -11,11 +11,15 @@ if [[ ! "$name" =~ ^[A-Za-z0-9._-]+$ ]]; then
   echo 'Export name may contain only letters, numbers, dots, underscores, and hyphens.' >&2
   exit 1
 fi
+if [[ ! -d "$session_dir" ]]; then
+  echo 'No saved Pi session was found. Start Pi without --no-session first.' >&2
+  exit 1
+fi
 
-latest="$(find "$session_dir" -type f -name '*.jsonl' -printf '%T@ %p\n' 2>/dev/null \
+latest="$(find "$session_dir" -type f -name '*.jsonl' -printf '%T@ %p\n' \
   | sort -nr | head -1 | cut -d' ' -f2-)"
 if [[ -z "$latest" ]]; then
-  echo 'No saved Pi session was found.' >&2
+  echo 'No saved Pi session was found. Start Pi without --no-session first.' >&2
   exit 1
 fi
 
