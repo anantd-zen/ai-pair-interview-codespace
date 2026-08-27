@@ -4,9 +4,8 @@ set -euo pipefail
 workspace_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$workspace_dir"
 
-python -m venv .venv
-.venv/bin/python -m pip install --upgrade pip
-.venv/bin/python -m pip install -e '.[dev]'
+uv venv --allow-existing --python python .venv
+uv pip install --python .venv/bin/python -e '.[dev]'
 
 pi_npm_spec="${PI_NPM_SPEC:-@mariozechner/pi-coding-agent}"
 npm install --global "$pi_npm_spec"

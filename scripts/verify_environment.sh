@@ -4,8 +4,14 @@ set -euo pipefail
 workspace_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$workspace_dir"
 
+printf 'uv: '
+uv --version
+printf 'DuckDB CLI: '
+duckdb --version
 printf 'Python: '
 .venv/bin/python --version
+printf 'Python DuckDB: '
+.venv/bin/python -c 'import duckdb; print(duckdb.__version__)'
 printf 'Pi launcher: '
 pi --version
 
@@ -17,8 +23,7 @@ else
   echo 'OpenRouter key: missing; add a Codespaces secret'
 fi
 
-echo 'Default provider: openrouter'
-echo "Default model: ${PI_MODEL_OVERRIDE:-openrouter/free}"
-echo 'Model picker: openrouter/free only'
+echo 'Default provider: interview-openrouter'
+echo 'Default model: openrouter/free'
 echo 'Environment check complete.'
 
