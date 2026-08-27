@@ -29,5 +29,16 @@ ln -sfn "$workspace_dir/scripts/verify_environment.sh" "$HOME/.local/bin/verify-
 
 PI_CODING_AGENT_DIR="$agent_dir" "$pi_real" install npm:pi-web-access
 
+snapshot_dir="$workspace_dir/.interview-work/nyc311-q1-2025"
+mkdir -p "$snapshot_dir"
+gh release download nyc311-q1-2025 \
+  --repo anantd-zen/ai-pair-interview-codespace \
+  --pattern nyc_311_requests_2025_q1.parquet \
+  --pattern nyc_311_events_2025_q1.parquet \
+  --pattern snapshot_manifest.json \
+  --dir "$snapshot_dir" \
+  --clobber
+.venv/bin/python datasets/nyc311_q1_2025/validate_snapshot.py "$snapshot_dir"
+
 bash scripts/verify_environment.sh
 

@@ -10,37 +10,41 @@ This snapshot contains NYC 311 service requests created from 2025-01-01 through
 - `snapshot_manifest.json`: provenance, counts, privacy decisions, sizes, and SHA-256 hashes.
 - `reference/`: the official NYC XLSX dictionary and Socrata metadata captured with the snapshot.
 
-The Parquet files are GitHub Release assets rather than Git-tracked files.
+The Parquet files are private GitHub Release assets. Codespace setup downloads
+and checksum-validates them once using the authenticated GitHub CLI.
 
-## Query directly from DuckDB
+## Open in DuckDB
 
-```sql
-INSTALL httpfs;
-LOAD httpfs;
+From the repository root:
 
-CREATE VIEW requests AS
-SELECT *
-FROM read_parquet(
-  'https://github.com/anantd-zen/ai-pair-interview-codespace/releases/download/nyc311-q1-2025/nyc_311_requests_2025_q1.parquet'
-);
-
-CREATE VIEW events AS
-SELECT *
-FROM read_parquet(
-  'https://github.com/anantd-zen/ai-pair-interview-codespace/releases/download/nyc311-q1-2025/nyc_311_events_2025_q1.parquet'
-);
+```bash
+duckdb -init datasets/nyc311_q1_2025/open_snapshot.sql
 ```
 
-For an interview, downloading the files once is more resilient than repeatedly
-querying GitHub over HTTP.
+The initialization script creates:
+
+- `nyc_311_requests`
+- `nyc_311_events`
+
+Example:
+
+```sql
+SELECT borough, count(*) AS requests
+FROM nyc_311_requests
+GROUP BY borough
+ORDER BY requests DESC;
+```
+
+Files live under `.interview-work/nyc311-q1-2025/`, which is intentionally
+ignored by Git.
 
 ## Build locally
 
 ```bash
 uv run --with duckdb==1.5.5 \
   datasets/nyc311_q1_2025/build_snapshot.py \
-  --work-dir .interview-work/nyc311-q1-2025 \
-  --output-dir .interview-work/nyc311-q1-2025/dist
+  --work-dir .interview-work/nyc311-q1-2025-build \
+  --output-dir .interview-work/nyc311-q1-2025-build/dist
 ```
 
 Downloads are paginated and resumable. The build fails if the source count

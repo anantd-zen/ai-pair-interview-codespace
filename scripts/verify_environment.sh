@@ -23,6 +23,14 @@ else
   echo 'OpenRouter key: missing; add a Codespaces secret'
 fi
 
+snapshot_dir="$workspace_dir/.interview-work/nyc311-q1-2025"
+if [[ -f "$snapshot_dir/nyc_311_requests_2025_q1.parquet" \
+   && -f "$snapshot_dir/nyc_311_events_2025_q1.parquet" ]]; then
+  echo 'NYC 311 snapshot: available and checksum-validated'
+else
+  echo 'NYC 311 snapshot: missing; rerun bash scripts/setup.sh'
+fi
+
 echo 'Default provider: interview-openrouter'
 echo 'Default model: openrouter/free'
 echo 'Environment check complete.'
